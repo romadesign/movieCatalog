@@ -1,6 +1,6 @@
 <?php
 
-class Movie
+class Movie implements JsonSerializable
 {
     private string $title;
     private int $year;
@@ -26,6 +26,15 @@ class Movie
     public function getRating(): float
     {
         return $this->rating;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'title' => $this->title,
+            'year' => $this->year,
+            'rating' => $this->rating,
+        ];
     }
 }
 
