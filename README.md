@@ -30,6 +30,8 @@
         - console.php (para la aplicación de consola)
     - tests/ 
         - MovieRepositoryTest.php
+    - scripts/ "Contendra la implementación para mostrar los datos filtrados
+        - show-movies.php
     - README.md
 
 
@@ -38,6 +40,7 @@ Para inciar test
 ```
     ./vendor/bin/phpunit .\tests\MovieRepositoryTest.php
 ```
+Para verificar si las querys funcionan
 ## La rapidez en la entrega (aunque siempre por debajo de la calidad de la misma)
 
 
