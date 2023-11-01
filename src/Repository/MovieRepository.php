@@ -9,5 +9,10 @@ class MovieRepository
         $this->movies[] = $movie;
     }
 
+    public function getAllMovies(): array
+    {
+        return $this->movies;
+    }
+
 }
 

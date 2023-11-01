@@ -1,8 +1,13 @@
-# Instalar
+# pasos para poner en marcha la app
 - Tener instalado php8 
+- Tener instalado composer
+- Tener PHPUnit instalado: 
+    Verifica que tienes PHPUnit instalado en tu proyecto. Puedes instalar PHPUnit utilizando Composer si aún no lo has hecho. Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando:
 
+    ```
+    composer require --dev phpunit/phpunit
 
-## pasos para poner en marcha la app
+    ```
 
 ## Las decisiones tomadas y las motivaciones que había detrás
 
@@ -29,6 +34,10 @@
 
 
 ## Test unitarios
+Para inciar test
+```
+    ./vendor/bin/phpunit .\tests\MovieRepositoryTest.php
+```
 ## La rapidez en la entrega (aunque siempre por debajo de la calidad de la misma)
 
 
@@ -62,5 +71,13 @@
 - Guarda los cambios y cierra las ventanas de configuración.
 
 
+## Posibre errores en windows config Rutas (composer PATH)
+- Abrir el menú Inicio y busca "Variables de entorno" o "Edit the system environment variables" (Editar las variables de entorno del sistema) y selecciona la opción que aparezca en los resultados de búsqueda.
+- En la ventana de Propiedades del sistema, haz clic en el botón "Variables de entorno".
+- En la sección "Variables de sistema", busca la variable llamada "Path" (PATH).
+- Haz doble clic en la variable "Path" para editarla.
+- En la ventana "Editar variable de sistema", haz clic en "Nuevo".
+- Agrega la ubicación de la instalación de Composer. Por ejemplo, si instalaste Composer en         C:\ProgramData\ComposerSetup\bin, agrega esta ruta.
+- Haz clic en "Aceptar" para guardar los cambios.
 
 
