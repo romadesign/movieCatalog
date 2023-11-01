@@ -57,11 +57,35 @@ class MovieRepositoryTest extends TestCase
         $movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
         $movieRepository->addMovie(new Movie("Avatar", 2009, 7.8));
 
-        $filteredMovieByYear = $movieRepository->filterByYear(2022);                         
+        $filteredMovieByYear = $movieRepository->filterByYear(2022);
 
         $this->assertCount(1, $filteredMovieByYear);
 
         // Verificar que las películas filtradas coincidan con el año correcto
         $this->assertEquals(2022, $filteredMovieByYear[0]->getYear());
+    }
+
+
+    public function testFilterByRating()
+    {
+        $movieRepository = new MovieRepository();
+        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
+        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
+        $movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
+        $movieRepository->addMovie(new Movie("Avatar", 2009, 7.8));
+
+        // Filtrar por valor exacto
+        $filteredMovieByExactRating = $movieRepository->filterByRating(8.7, 8.7, 8.7);
+        $this->assertCount(1, $filteredMovieByExactRating);
+
+        // Filtrar por rango
+        $filteredMovieByRatingRange = $movieRepository->filterByRating(null, 8.0, 8.7);
+        $this->assertCount(2, $filteredMovieByRatingRange);
+
+        // Verificar que las películas filtradas tengan una valoración dentro del rango correcto
+        foreach ($filteredMovieByRatingRange as $movie) {
+            $this->assertGreaterThanOrEqual(8.0, $movie->getRating());
+            $this->assertLessThanOrEqual(8.7, $movie->getRating());
+        }
     }
 }

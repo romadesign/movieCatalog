@@ -31,4 +31,17 @@ class MovieRepository
             return $movie->getYear() === $query;
         });
     }
+
+    public function filterByRating(?float $rating, float $minRating, float $maxRating)
+    {
+        return array_filter($this->movies, function (Movie $movie) use ($rating, $minRating, $maxRating) {
+            if ( $rating !== null) {
+                // Filtrar por valor exacto
+                return $movie->getRating() == $rating;
+            } else {
+                // Filtrar por rango
+                return $movie->getRating() >= $minRating && $movie->getRating() <= $maxRating;
+            }
+        });
+    }
 }
