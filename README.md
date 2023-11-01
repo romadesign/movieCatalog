@@ -27,10 +27,9 @@
             - MovieService.php
     - public/
         - index.php (para la interfaz web)
-        - console.php (para la aplicación de consola)
     - tests/ 
         - MovieRepositoryTest.php
-    - scripts/ "Contendra la implementación para mostrar los datos filtrados
+    - scripts/ (para  mostrar los datos por consola)
         - show-movies.php
     - README.md
 

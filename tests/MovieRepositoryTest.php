@@ -48,4 +48,20 @@ class MovieRepositoryTest extends TestCase
         $this->assertNotContains("Matrix", array_column($filteredMovies, 'getTitle'));
         $this->assertNotContains("Avatar", array_column($filteredMovies, 'getTitle'));
     }
+
+    public function testFilterByYear()
+    {
+        $movieRepository = new MovieRepository();
+        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
+        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
+        $movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
+        $movieRepository->addMovie(new Movie("Avatar", 2009, 7.8));
+
+        $filteredMovieByYear = $movieRepository->filterByYear(2022);                         
+
+        $this->assertCount(1, $filteredMovieByYear);
+
+        // Verificar que las películas filtradas coincidan con el año correcto
+        $this->assertEquals(2022, $filteredMovieByYear[0]->getYear());
+    }
 }
