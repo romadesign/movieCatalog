@@ -5,5 +5,5 @@ function hola( string $string)
     echo $string;
 }
 
-hola("hla");
+hola("hla desde public");
 ?>
