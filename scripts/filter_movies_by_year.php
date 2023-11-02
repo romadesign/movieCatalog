@@ -1,27 +1,29 @@
 <?php
 
-require 'src/Repository/MovieRepository.php';
-require 'src/Model/Movie.php';
+require 'createMovies.php'; // Incluye el archivo que crea películas
 
-// add movies
-$movieRepository = new MovieRepository();
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
-$movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
-$movieRepository->addMovie(new Movie("Avatar", 1999, 7.8));
+$movies = $_SESSION['movies']; // Obtiene las películas de la sesión
 
-// search
-$searchQuery = 1999;
+// Define el año por el cual deseas filtrar
+$yearToFilter = 1999; // Cambia esto al año deseado
 
-// Filtra películas por título que contienen la consulta
-$filteredMovieByYear = $movieRepository->filterByYear(strtolower($searchQuery));
+// Inicializa un arreglo para almacenar las películas filtradas
+$filteredMovies = [];
 
-// Muestra las películas filtradas
-if (empty($filteredMovieByYear)) {
-    echo "No se encontraron películas que coincidan con la búsqueda.\n";
-} else {
-    echo "Películas que coinciden con la búsqueda por año:\n";
-    foreach ($filteredMovieByYear as $movie) {
-        echo "- Título: " . $movie->getTitle() . ", Año: " . $movie->getYear() . ", Valoración: " . $movie->getRating() . "\n";
+foreach ($movies as $movie) {
+    // Obtiene el año de la película
+    $year = $movie->getYear();
+
+    // Compara el año de la película con el año especificado
+    if ($year === $yearToFilter) {
+        $filteredMovies[] = $movie;
     }
+}
+
+// Muestra las películas filtradas en la consola
+foreach ($filteredMovies as $movie) {
+    echo "Título: " . $movie->getTitle() . PHP_EOL;
+    echo "Año: " . $movie->getYear() . PHP_EOL;
+    echo "Valoración: " . $movie->getRating() . PHP_EOL;
+    echo PHP_EOL;
 }

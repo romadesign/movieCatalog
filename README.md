@@ -1,7 +1,8 @@
 # pasos para poner en marcha la app
 - Tener instalado php8 
 - Tener instalado composer
-- Tener PHPUnit instalado: 
+- Tener instalado xampp se clonara el repositorio y se llevara a la carpeta http
+- Tener PHPUnit instalado en el proyecto: 
     Verifica que tienes PHPUnit instalado en tu proyecto. Puedes instalar PHPUnit utilizando Composer si aún no lo has hecho. Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando:
 
     ```
@@ -9,11 +10,33 @@
 
     ```
 
-## Las decisiones tomadas y las motivaciones que había detrás
+
+## Decisiones y Motivaciones detrás del Proyecto
+En este proyecto se tomaron diversas decisiones con el objetivo de construir una plataforma desde cero en lugar de utilizar un framework existente. Estas decisiones se basaron en varias motivaciones:
+
+- Construcción desde Cero: La elección de desarrollar el proyecto desde cero se realizó con el propósito de crear un entorno funcional personalizado para futuros proyectos en PHP. Esto permitió organizar cuidadosamente todos los componentes del proyecto y establecer las bases para proyectos escalables en el futuro.
+
+- Utilización de PHP: El lenguaje PHP se seleccionó debido a la intención de demostrar un conocimiento sólido del lenguaje y su capacidad para crear soluciones personalizadas. Se utilizó PHP para la construcción de la plataforma, desde la gestión de datos hasta la presentación de la información.
+
+- Pruebas Unitarias con PHPUnit: La elección de utilizar PHPUnit como marco de pruebas se basó en el deseo de comprender en profundidad cómo se realizan pruebas en PHP y cómo se configura un entorno de pruebas efectivo. Aunque fue la primera vez que se utilizó PHPUnit, se buscó asegurarse de que las pruebas unitarias funcionaran de manera efectiva y contribuyeran a la robustez y calidad del proyecto.
+
+Estas decisiones y motivaciones se alinearon con el objetivo de adquirir experiencia y conocimientos sólidos en PHP y desarrollo de software, preparando así un entorno personalizado y funcional para futuros proyectos.
+
 
 ## Que hubieses hecho diferente si contases con más tiempo
+ Si tuviera más tiempo para el proyecto, habría considerado agregar varias funcionalidades adicionales para mejorar su robustez y utilidad:
 
-## Clean code
+- Sistema de Autenticación y Autorización: Implementar un sistema de autenticación y autorización habría sido una adición importante. Esto permitiría a los usuarios crear cuentas, iniciar sesión y acceder a funcionalidades específicas según sus roles. La autenticación y autorización son componentes esenciales para muchas aplicaciones web.
+
+- Almacenamiento en una Base de Datos: En lugar de mantener los datos de las películas en una matriz en memoria, habría optado por utilizar una base de datos. Esto habría permitido una mayor escalabilidad y una mejor gestión de los datos.
+
+- Creación de Nuevos Modelos: Podría haber creado modelos adicionales para representar diferentes entidades en el sistema. Por ejemplo, un modelo de usuario si se implementara la autenticación, un modelo de género de película, etc.
+
+- Métodos Adicionales: Se podrían haber agregado más métodos al repositorio, como findById, update y delete. Estos métodos habrían brindado una funcionalidad completa de operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en los datos de las películas.
+
+- Interfaz de Usuario Frontend: Habría desarrollado una interfaz de usuario (UI) en el frontend para que los usuarios puedan interactuar fácilmente con la aplicación. Esto incluiría la visualización de datos, la búsqueda de películas y la capacidad de realizar operaciones CRUD si es relevante.
+
+    Estas adiciones habrían mejorado significativamente la funcionalidad y la usabilidad del proyecto, pero requerirían más tiempo y esfuerzo de desarrollo.
 
 ## Arquitectura / Diseño de los componentes
 
@@ -23,14 +46,13 @@
             - MovieRepository.php
         - Model/
             - Movie.php
-        - Service/ "Contendrá las clases de modelo"
-            - MovieService.php
     - public/
         - index.php (para la interfaz web)
     - tests/ 
         - MovieRepositoryTest.php
     - scripts/ (para  mostrar los datos por consola)
         - show-movies.php
+    - createMovie.php  "Contiene las peliculas en $_SESSION['movies']
     - README.md
 
 
@@ -39,28 +61,15 @@ Para inciar test
 ```
     ./vendor/bin/phpunit .\tests\MovieRepositoryTest.php
 ```
-Para verificar si las querys funcionan
+Para  iniciar scripts 
+```
+    php .\scripts\filter_movies_by_rating.php
+    php .\scripts\filter_movies_by_title.php    
+    php .\scripts\filter_movies_by_year.php
+    php .\scripts\show_movies.php  
+```
 ## La rapidez en la entrega (aunque siempre por debajo de la calidad de la misma)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Total de horas realizando el proyecto 10 Horas
 
 
 ## Posibre errores en windows config Rutas (php no se encuentra en el PATH) al utilizar Xampp
@@ -83,3 +92,11 @@ Para verificar si las querys funcionan
 - Haz clic en "Aceptar" para guardar los cambios.
 
 
+## Rutas api
+http://localhost:8080/api.php?action=getMovies
+http://localhost:8080/api.php?action=filterByTitle&query=the&mode=startswith
+http://localhost:8080/api.php?action=filterByTitle&query=matrix&mode=contains
+http://localhost:8080/api.php?action=filterByTitle&query=on&mode=endswith
+http://localhost:8080/api.php?action=filterByYear&year=1999
+http://localhost:8080/api.php?action=filterByRating&rating=8.0
+http://localhost:8080/api.php?action=filterByRating&minRating=7.0&maxRating=9.0

@@ -7,6 +7,23 @@ require 'src/Model/Movie.php';
 
 class MovieRepositoryTest extends TestCase
 {
+    public function testGetAllMovies()
+    {   
+        @session_start();
+        // Crea una instancia de MovieRepository
+        $movieRepository = new MovieRepository();
+
+        // Agrega películas al repositorio
+        $movieRepository->addMovie(new Movie("Película 1", 2022, 8.0));
+        $movieRepository->addMovie(new Movie("Película 2", 2020, 7.5));
+
+        // Obtiene todas las películas del repositorio
+        $allMovies = $movieRepository->getAllMovies();
+
+        // Realiza las aserciones necesarias
+        $this->assertNotEmpty($allMovies);
+    }
+
     public function testAddMovie()
     {
         // Configura el repositorio en memoria
@@ -24,29 +41,63 @@ class MovieRepositoryTest extends TestCase
         $movies = $movieRepository->getAllMovies();
 
         $this->assertEquals("Rapidos y furiosos 1", $movies[0]->getTitle());
-
         $this->assertEquals("Rapidos y furiosos 2", $movies[1]->getTitle());
     }
 
-    public function testFilterByTitle()
+    public function testFilterByTitleStartsWith()
     {
         $movieRepository = new MovieRepository();
-        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
-        $movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
-        $movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
-        $movieRepository->addMovie(new Movie("Avatar", 2009, 7.8));
 
-        $filteredMovies = $movieRepository->filterByTitle("Rápidos");
+        // Crea algunas películas de ejemplo
+        $movieRepository->addMovie(new Movie("Inception", 2010, 8.8));
+        $movieRepository->addMovie(new Movie("The Dark Knight", 2008, 9.0));
+        $movieRepository->addMovie(new Movie("Interstellar", 2014, 8.6));
 
+        // Filtra películas que comienzan con "In"
+        $filteredMovies = $movieRepository->filterByTitle(strtolower("In"), 'startswith');
+
+        // Verifica que haya 1 película que comienza con "In"
         $this->assertCount(2, $filteredMovies);
 
-        // Verificar que las películas filtradas coincidan con el título esperado
-        $this->assertEquals("Rápidos y Furiosos 1", $filteredMovies[0]->getTitle());
-        $this->assertEquals("Rápidos y Furiosos 2", $filteredMovies[1]->getTitle());
+        // Verifica que la película que se encontro "
+        $this->assertEquals("Inception", $filteredMovies[0]->getTitle());
+        $this->assertEquals("Interstellar", $filteredMovies[2]->getTitle());
+    }
 
-        // Verificar que las películas filtradas no incluyan otras películas
-        $this->assertNotContains("Matrix", array_column($filteredMovies, 'getTitle'));
-        $this->assertNotContains("Avatar", array_column($filteredMovies, 'getTitle'));
+
+    public function testFilterByTitleContains()
+    {
+        $movieRepository = new MovieRepository();
+    
+        // Crea algunas películas de ejemplo
+        $movieRepository->addMovie(new Movie("Inception", 2022, 8.5));
+        $movieRepository->addMovie(new Movie("The Dark Knight", 2020, 7.8));
+        $movieRepository->addMovie(new Movie("Interstellar", 1999, 8.7));
+        $movieRepository->addMovie(new Movie("Interstellar the data", 2009, 7.8));
+
+        // Filtra películas que contienen "the"
+        $filteredMovies = $movieRepository->filterByTitle("The Dark Knight", 'contains');
+    
+        $this->assertCount(1, $filteredMovies); // Esperamos que haya 2 películas que contienen "the"
+    
+        // Verifica que las películas que se encontraron son correctas
+        $this->assertEquals("The Dark Knight", $filteredMovies[1]->getTitle());
+    }
+    
+
+    public function testFilterByTitleEndsWith()
+    {
+        $movieRepository = new MovieRepository();
+
+        // Crea algunas películas de ejemplo
+        $movieRepository->addMovie(new Movie("Inception", 2010, 8.8));
+        $movieRepository->addMovie(new Movie("The Dark Knight", 2008, 9.0));
+        $movieRepository->addMovie(new Movie("Interstellar", 2014, 8.6));
+
+        // Filtra películas que terminan con "ar"
+        $filteredMovies = $movieRepository->filterByTitle("ar", 'endswith');
+
+        $this->assertCount(1, $filteredMovies); // Esperamos que haya 1 película que termina con "ar"
     }
 
     public function testFilterByYear()

@@ -1,41 +1,45 @@
 <?php
 
-require 'src/Repository/MovieRepository.php';
-require 'src/Model/Movie.php';
+require 'createMovies.php'; // Incluye el archivo que crea películas
 
-// add movies
-$movieRepository = new MovieRepository();
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
-$movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
-$movieRepository->addMovie(new Movie("Avatar", 1999, 7.8));
-$movieRepository->addMovie(new Movie("X-men", 1995, 5.5));
+$movies = $_SESSION['movies']; // Obtiene las películas de la sesión
 
-// rating querys
-$ratingQuery = 8.7;
-$minRating = 5.5;
-$maxRating = 8.5;
+// Define el valor de rating que deseas buscar (query) y el rango mínimo y máximo
+$ratingQuery = 6.4; // Cambia esto al valor deseado
+$minRating = 7.5;  // Cambia esto al valor mínimo deseado
+$maxRating = 8.5;  // Cambia esto al valor máximo deseado
 
-// Filtrar por valor exacto
-$filteredMovieByRating = $movieRepository->filterByRating($ratingQuery, $ratingQuery, $ratingQuery);
+// Inicializa un arreglo para almacenar las películas filtradas
+$filteredMoviesMaxMin = [];
+$filteredMovies = [];
 
-// Muestra las películas filtradas solo por valor exacto
-if (empty($filteredMovieByRating)) {
-    echo "No se encontraron películas que coincidan con la búsqueda.\n";
-} else {
-    echo "Películas que coinciden con la búsqueda por rating exacto:\n";
-    foreach ($filteredMovieByRating as $movie) {
-        echo "- Título: " . $movie->getTitle() . ", Año: " . $movie->getYear() . ", Valoración: " . $movie->getRating() . "\n";
+foreach ($movies as $movie) {
+    // Obtiene el valor de rating de la película
+    $rating = $movie->getRating();
+
+    // Compara el valor de rating con el rango especificado
+    if ($rating == $ratingQuery ) {
+        $filteredMovies[] = $movie;
+    }
+    if (($rating >= $minRating && $rating <= $maxRating)) {
+        $filteredMoviesMaxMin[] = $movie;
     }
 }
 
-// Filtrar por rango
-$filteredMovieByRatingRange = $movieRepository->filterByRating(null, $minRating, $maxRating);
-if (empty($filteredMovieByRatingRange)) {
-    echo "No se encontraron películas que coincidan con la búsqueda.\n";
-} else {
-    echo "Películas que coinciden con la búsqueda por rating range:\n";
-    foreach ($filteredMovieByRatingRange as $movie) {
-        echo "- Título: " . $movie->getTitle() . ", Año: " . $movie->getYear() . ", Valoración: " . $movie->getRating() . "\n";
-    }
+// Muestra las películas filtradas en la consola por min and max rating
+echo "___Filtro por rating min and max____" . PHP_EOL;
+foreach ($filteredMoviesMaxMin as $movie) {
+    echo "Título: " . $movie->getTitle() . PHP_EOL;
+    echo "Año: " . $movie->getYear() . PHP_EOL;
+    echo "Valoración: " . $movie->getRating() . PHP_EOL;
+    echo PHP_EOL;
+}
+
+// Muestra las películas filtradas en la consola solo ratingQuery
+echo "___Filtro por rating query____" . PHP_EOL;
+foreach ($filteredMovies as $movie) {
+    echo "Título: " . $movie->getTitle() . PHP_EOL;
+    echo "Año: " . $movie->getYear() . PHP_EOL;
+    echo "Valoración: " . $movie->getRating() . PHP_EOL;
+    echo PHP_EOL;
 }

@@ -1,27 +1,33 @@
 <?php
 
-require 'src/Repository/MovieRepository.php';
-require 'src/Model/Movie.php';
+require 'createMovies.php'; // Incluye el archivo que crea películas
 
-// add movies
-$movieRepository = new MovieRepository();
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 1", 2022, 8.5));
-$movieRepository->addMovie(new Movie("Rápidos y Furiosos 2", 2020, 7.8));
-$movieRepository->addMovie(new Movie("Matrix", 1999, 8.7));
-$movieRepository->addMovie(new Movie("Avatar", 2009, 7.8));
+$movies = $_SESSION['movies']; // Obtiene las películas de la sesión
 
-// search
-$searchQuery = "m";
+// Define el criterio de filtro y el tipo de filtro
+$filter = "on"; // Reemplaza esto con tu criterio de filtro
+$filterType = "endswith"; // Puedes cambiar esto a "contains" o "endswith" según tus necesidades
 
-// Filtra películas por título que contienen la consulta
-$filteredMovies = $movieRepository->filterByTitle(strtolower($searchQuery));
+// Inicializa un arreglo para almacenar las películas filtradas
+$filteredMovies = [];
 
-// Muestra las películas filtradas
-if (empty($filteredMovies)) {
-    echo "No se encontraron películas que coincidan con la búsqueda por title.\n";
-} else {
-    echo "Películas que coinciden con la búsqueda por title:\n";
-    foreach ($filteredMovies as $movie) {
-        echo "- Título: " . $movie->getTitle() . ", Año: " . $movie->getYear() . ", Valoración: " . $movie->getRating() . "\n";
+foreach ($movies as $movie) {
+    // Aplica la lógica de filtro según el tipo especificado
+    $title = strtolower($movie->getTitle());
+
+    if ($filterType === "startswith" && strpos($title, strtolower($filter)) === 0) {
+        $filteredMovies[] = $movie;
+    } elseif ($filterType === "contains" && strpos($title, strtolower($filter)) !== false) {
+        $filteredMovies[] = $movie;
+    } elseif ($filterType === "endswith" && substr($title, -strlen($filter)) === strtolower($filter)) {
+        $filteredMovies[] = $movie;
     }
+}
+
+// Muestra las películas filtradas en la consola
+foreach ($filteredMovies as $movie) {
+    echo "Título: " . $movie->getTitle() . " ";
+    echo "Año: " . $movie->getYear() . " ";
+    echo "Valoración: " . $movie->getRating() . " ";
+    echo PHP_EOL;
 }

@@ -1,8 +1,8 @@
 <?php
 
-require './createMovies.php';
+require 'createMovies.php'; // Incluye el archivo que crea películas
 
-$movies = $_SESSION['movies'];
+$movies = $_SESSION['movies']; // Obtiene las películas de la sesión
 
 // Muestra las películas en la consola
 foreach ($movies as $movie) {
@@ -11,4 +11,5 @@ foreach ($movies as $movie) {
     echo "Valoración: " . $movie->getRating() . PHP_EOL;
     echo PHP_EOL;
 }
+
 
