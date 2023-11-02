@@ -28,7 +28,8 @@ class Movie implements JsonSerializable
         return $this->rating;
     }
 
-    public function jsonSerialize()
+
+    public function jsonSerialize(): mixed
     {
         return [
             'title' => $this->title,

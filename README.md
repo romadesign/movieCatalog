@@ -100,3 +100,8 @@ http://localhost:8080/api.php?action=filterByTitle&query=on&mode=endswith
 http://localhost:8080/api.php?action=filterByYear&year=1999
 http://localhost:8080/api.php?action=filterByRating&rating=8.0
 http://localhost:8080/api.php?action=filterByRating&minRating=7.0&maxRating=9.0
+
+Para iniciar servidor para que las rutas de la api funcionen: 
+```
+    php -S 0.0.0.0:8080
+```
