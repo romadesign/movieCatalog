@@ -29,7 +29,8 @@ class Movie implements JsonSerializable
     }
 
 
-    public function jsonSerialize(): mixed
+
+    public function jsonSerialize(): array
     {
         return [
             'title' => $this->title,
@@ -37,5 +38,28 @@ class Movie implements JsonSerializable
             'rating' => $this->rating,
         ];
     }
-}
 
+    public function jsonserializeTitle(): array
+    {
+        return [
+            'title' => $this->title,
+            'year' => $this->year,
+        ];
+    }
+
+    public function jsonSerializeTitleYear(): array
+    {
+        return [
+            'title' => $this->title,
+            'year' => $this->year,
+        ];
+    }
+
+    public function jsonSerializeTitleRating(): array
+    {
+        return [
+            'title' => $this->title,
+            'rating' => $this->rating,
+        ];
+    }
+}

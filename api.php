@@ -1,16 +1,23 @@
 <?php
-require 'src/Repository/MovieRepository.php';
-require 'src/Model/Movie.php';
+// Comentar o eliminar si ya no se requiere utilizar los datos en memoria
+require 'createMovies.php';
+// Descomentar cuando ya tengamos una DDBB
+// require 'src/Repository/MovieRepository.php';
+// require 'src/Model/Movie.php';
+//$movieRepository = new MovieRepository();
 
 header('Content-Type: application/json'); // Configura la respuesta como JSON
 
-// Crear una instancia del repositorio
-$movieRepository = new MovieRepository();
-
 // Ruta para obtener todas las películas
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'getMovies') {
+    // $movies = $movieRepository->getAllMovies();
+    // echo json_encode($movies);
+
     $movies = $movieRepository->getAllMovies();
-    echo json_encode($movies);
+    $serializedMovies = json_encode(array_map(function($movie) {
+        return $movie->jsonSerializeTitle();
+    }, $movies));
+    echo $serializedMovies;
 }
 
 // Ruta para filtrar películas por título

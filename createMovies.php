@@ -1,7 +1,7 @@
 <?php
-session_start();
-require 'src/Repository/MovieRepository.php';
 require 'src/Model/Movie.php';
+require 'src/Repository/MovieRepository.php';
+session_start();
 
 // add movies
 $movieRepository = new MovieRepository();

@@ -22,6 +22,11 @@ En este proyecto se tomaron diversas decisiones con el objetivo de construir una
 
 Estas decisiones y motivaciones se alinearon con el objetivo de adquirir experiencia y conocimientos sólidos en PHP y desarrollo de software, preparando así un entorno personalizado y funcional para futuros proyectos.
 
+- Se decidio Guardar datos en memoria con session_start():
+    . Facilidad de uso: session_start() es relativamente sencillo de implementar y no requiere configuraciones adicionales o la instalación de bibliotecas externas como Memcached o Redis.
+    . Persistencia a corto plazo: Las sesiones son adecuadas para mantener datos en memoria durante la duración de una visita del usuario al sitio web, pero estos datos se perderán cuando el usuario cierre su navegador o la sesión expire. 
+    . Bajo costo de recursos: Las sesiones generalmente tienen un bajo costo en términos de recursos del servidor en comparación con sistemas de caché más avanzados como Memcached o Redis. Si estás trabajando en un entorno con recursos limitados, las sesiones pueden ser una opción más liviana.
+
 
 ## Que hubieses hecho diferente si contases con más tiempo
  Si tuviera más tiempo para el proyecto, habría considerado agregar varias funcionalidades adicionales para mejorar su robustez y utilidad:
@@ -63,10 +68,7 @@ Para inciar test
 ```
 Para  iniciar scripts 
 ```
-    php .\scripts\filter_movies_by_rating.php
-    php .\scripts\filter_movies_by_title.php    
-    php .\scripts\filter_movies_by_year.php
-    php .\scripts\show_movies.php  
+    php .\scripts\movies.php  
 ```
 ## La rapidez en la entrega (aunque siempre por debajo de la calidad de la misma)
 - Total de horas realizando el proyecto 10 Horas

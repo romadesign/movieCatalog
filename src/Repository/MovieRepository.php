@@ -1,8 +1,13 @@
 <?php
+
 class MovieRepository
 {
     private array $movies = [];
 
+    private function getMoviesFromSession()
+    {
+        return $_SESSION['movies'] ?? $this->movies;
+    }
 
     public function addMovie(Movie $movie): void
     {
@@ -11,57 +16,72 @@ class MovieRepository
 
     public function getAllMovies(): array
     {
-        @session_start();
-        $movies = ($_SESSION['movies'] ?? null) ?: $this->movies;
+        $movies = $this->getMoviesFromSession();
         return $movies;
     }
 
     public function filterByTitle(string $query, string $mode = 'contains'): array
     {
-        @session_start();
-        $movies = $_SESSION['movies'] ?? $this->movies;
+        $movies = $this->getMoviesFromSession();
 
-        $query = strtolower($query); // Convertir la consulta a minúsculas para una comparación insensible a mayúsculas y minúsculas
-        return array_filter($movies, function (Movie $movie) use ($query, $mode) {
-            $title = strtolower($movie->getTitle()); // Convertir a minúsculas para una comparación insensible a mayúsculas y minúsculas
+        $query = strtolower($query);
+        $filteredMovies = [];
 
-            if ($mode === 'contains') {
-                return strpos($title, $query) !== false;
-            } elseif ($mode === 'startswith') {
-                return strpos($title, $query) === 0;
+        foreach ($movies as $movie) {
+            $title = strtolower($movie->getTitle());
+
+            if ($mode === 'contains' && strpos($title, $query) !== false) {
+                array_push($filteredMovies, $movie);
+            } elseif ($mode === 'startswith' && strpos($title, $query) === 0) {
+                array_push($filteredMovies, $movie);
             } elseif ($mode === 'endswith') {
                 $queryLength = strlen($query);
                 $titleLength = strlen($title);
-                return $queryLength <= $titleLength && substr($title, $titleLength - $queryLength) === $query;
+                if ($queryLength <= $titleLength && substr($title, $titleLength - $queryLength) === $query) {
+                    array_push($filteredMovies, $movie);
+                }
             }
+        }
 
-            return false; // Modo no válido
-        });
+        return $filteredMovies;
     }
 
-    public function filterByYear(int $query)
-    {
-        @session_start();
-        $movies = isset($_SESSION['movies']) ? $_SESSION['movies'] : $this->movies;
 
-        return array_filter($movies, function (Movie $movie) use ($query) {
-            return $movie->getYear() === $query;
-        });
+    public function filterByYear(int $year)
+    {
+        $movies = $this->getMoviesFromSession();
+
+        $filteredMovies = [];
+
+        foreach ($movies as $movie) {
+            if ($movie->getYear() === $year) {
+                array_push($filteredMovies, $movie);
+            }
+        }
+
+        return $filteredMovies;
     }
 
     public function filterByRating(?float $rating, float $minRating, float $maxRating)
     {
-        @session_start();
-        $movies = isset($_SESSION['movies']) ? $_SESSION['movies'] : $this->movies;
+        $movies = $this->getMoviesFromSession();
 
-        return array_filter($movies, function (Movie $movie) use ($rating, $minRating, $maxRating) {
+        $filteredMovies = [];
+
+        foreach ($movies as $movie) {
             if ($rating !== null) {
                 // Filtrar por valor exacto
-                return $movie->getRating() == $rating;
+                if ($movie->getRating() == $rating) {
+                    array_push($filteredMovies, $movie);
+                }
             } else {
                 // Filtrar por rango
-                return $movie->getRating() >= $minRating && $movie->getRating() <= $maxRating;
+                if ($movie->getRating() >= $minRating && $movie->getRating() <= $maxRating) {
+                    array_push($filteredMovies, $movie);
+                }
             }
-        });
+        }
+
+        return $filteredMovies;
     }
 }

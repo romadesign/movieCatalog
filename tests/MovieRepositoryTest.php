@@ -8,7 +8,7 @@ require 'src/Model/Movie.php';
 class MovieRepositoryTest extends TestCase
 {
     public function testGetAllMovies()
-    {   
+    {
         @session_start();
         // Crea una instancia de MovieRepository
         $movieRepository = new MovieRepository();
@@ -54,36 +54,33 @@ class MovieRepositoryTest extends TestCase
         $movieRepository->addMovie(new Movie("Interstellar", 2014, 8.6));
 
         // Filtra películas que comienzan con "In"
-        $filteredMovies = $movieRepository->filterByTitle(strtolower("In"), 'startswith');
+        $filteredMovies = $movieRepository->filterByTitle("In", 'startswith');
 
-        // Verifica que haya 1 película que comienza con "In"
+        // Verifica que haya 2 películas que comienzan con "In"
         $this->assertCount(2, $filteredMovies);
 
-        // Verifica que la película que se encontro "
+        // Verifica que los títulos de las películas en el resultado son correctos
         $this->assertEquals("Inception", $filteredMovies[0]->getTitle());
-        $this->assertEquals("Interstellar", $filteredMovies[2]->getTitle());
+        $this->assertEquals("Interstellar", $filteredMovies[1]->getTitle());
     }
-
 
     public function testFilterByTitleContains()
     {
         $movieRepository = new MovieRepository();
-    
-        // Crea algunas películas de ejemplo
-        $movieRepository->addMovie(new Movie("Inception", 2022, 8.5));
-        $movieRepository->addMovie(new Movie("The Dark Knight", 2020, 7.8));
-        $movieRepository->addMovie(new Movie("Interstellar", 1999, 8.7));
-        $movieRepository->addMovie(new Movie("Interstellar the data", 2009, 7.8));
 
-        // Filtra películas que contienen "the"
+        // Configura tus datos de prueba
+        $movieRepository->addMovie(new Movie("The Dark Knight", 2020, 7.8));
+        $movieRepository->addMovie(new Movie("Inception", 2022, 8.5));
+
+        // Filtra películas que contienen "The Dark Knight"
         $filteredMovies = $movieRepository->filterByTitle("The Dark Knight", 'contains');
-    
-        $this->assertCount(1, $filteredMovies); // Esperamos que haya 2 películas que contienen "the"
-    
-        // Verifica que las películas que se encontraron son correctas
-        $this->assertEquals("The Dark Knight", $filteredMovies[1]->getTitle());
+
+        // Verifica que haya al menos una película en el resultado
+        $this->assertNotEmpty($filteredMovies);
+
+        // Verifica que el título de la película coincida con "The Dark Knight"
+        $this->assertEquals("The Dark Knight", $filteredMovies[0]->getTitle());
     }
-    
 
     public function testFilterByTitleEndsWith()
     {

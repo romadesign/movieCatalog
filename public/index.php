@@ -1,19 +1,21 @@
 <?php
-require '../src/Repository/MovieRepository.php';
-require '../src/Model/Movie.php';
+// Comentar o eliminar si ya no se requiere utilizar los datos en memoria
+require '../createMovies.php';
 
-// Crear una instancia del repositorio
-$movieRepository = new MovieRepository();
+// Descomentar cuando ya tengamos una DDBB
+// require '../src/Repository/MovieRepository.php';
+// require '../src/Model/Movie.php';
+//$movieRepository = new MovieRepository();
 
 //Traer todas la peliculas
-// $getAllMovies = $movieRepository->getAllMovies();
-// $jsonMovies = json_encode($getAllMovies);
+$getAllMovies = $movieRepository->getAllMovies();
+$jsonMovies = json_encode($getAllMovies);
 
 // Filtrar peliculas por title: empieza por, contiene, termina en
 // $movies = $movieRepository->filterByTitle("The",'startswith');
-$movies = $movieRepository->filterByTitle("The Dark Knight",'contains');
+// $movies = $movieRepository->filterByTitle("The Dark Knight",'contains');
 // $movies = $movieRepository->filterByTitle("on",'endswith');
-$jsonMovies = json_encode($movies);
+// $jsonMovies = json_encode($movies);
 
 // Filtrar peliculas por año
 // $moviesByYear = $movieRepository->filterByYear(1999);
