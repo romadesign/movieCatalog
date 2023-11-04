@@ -23,9 +23,9 @@ En este proyecto se tomaron diversas decisiones con el objetivo de construir una
 Estas decisiones y motivaciones se alinearon con el objetivo de adquirir experiencia y conocimientos sólidos en PHP y desarrollo de software, preparando así un entorno personalizado y funcional para futuros proyectos.
 
 - Se decidio Guardar datos en memoria con session_start():
-    . Facilidad de uso: session_start() es relativamente sencillo de implementar y no requiere configuraciones adicionales o la instalación de bibliotecas externas como Memcached o Redis.
-    . Persistencia a corto plazo: Las sesiones son adecuadas para mantener datos en memoria durante la duración de una visita del usuario al sitio web, pero estos datos se perderán cuando el usuario cierre su navegador o la sesión expire. 
-    . Bajo costo de recursos: Las sesiones generalmente tienen un bajo costo en términos de recursos del servidor en comparación con sistemas de caché más avanzados como Memcached o Redis. Si estás trabajando en un entorno con recursos limitados, las sesiones pueden ser una opción más liviana.
+    - Facilidad de uso: session_start() es relativamente sencillo de implementar y no requiere configuraciones adicionales o la instalación de bibliotecas externas como Memcached o Redis.
+    - Persistencia a corto plazo: Las sesiones son adecuadas para mantener datos en memoria durante la duración de una visita del usuario al sitio web, pero estos datos se perderán cuando el usuario cierre su navegador o la sesión expire. 
+    - Bajo costo de recursos: Las sesiones generalmente tienen un bajo costo en términos de recursos del servidor en comparación con sistemas de caché más avanzados como Memcached o Redis. Si estás trabajando en un entorno con recursos limitados, las sesiones pueden ser una opción más liviana.
 
 
 ## Que hubieses hecho diferente si contases con más tiempo
@@ -75,26 +75,27 @@ Para  iniciar scripts
 
 
 ## Posibre errores en windows config Rutas (php no se encuentra en el PATH) al utilizar Xampp
-- Agrega PHP al PATH: Si PHP está instalado pero no se encuentra en el PATH, debes agregar la ruta de acceso al ejecutable de PHP al PATH del sistema. 
-- Propiedades del sistema (hacer clic con el botón derecho en "Este equipo" y seleccionar "Propiedades").
-- Clic en "Configuración avanzada del sistema" en el lado izquierdo.
-- En la pestaña "Opciones avanzadas", haz clic en "Variables de entorno".
-- En la sección "Variables del sistema", busca la variable "Path" (o "PATH") y haz clic en "Editar".
-- Agrega la ruta de acceso al directorio donde está instalado PHP (por ejemplo, C:\xampp\php o C:\wamp64\bin\php\php8.0.0)
-- Guarda los cambios y cierra las ventanas de configuración.
+    - Agrega PHP al PATH: Si PHP está instalado pero no se encuentra en el PATH, debes agregar la ruta de acceso al ejecutable de PHP al PATH del sistema. 
+    - Propiedades del sistema (hacer clic con el botón derecho en "Este equipo" y seleccionar "Propiedades").
+    - Clic en "Configuración avanzada del sistema" en el lado izquierdo.
+    - En la pestaña "Opciones avanzadas", haz clic en "Variables de entorno".
+    - En la sección "Variables del sistema", busca la variable "Path" (o "PATH") y haz clic en "Editar".
+    - Agrega la ruta de acceso al directorio donde está instalado PHP (por ejemplo, C:\xampp\php o C:\wamp64\bin\php\php8.0.0)
+    - Guarda los cambios y cierra las ventanas de configuración.
 
 
 ## Posibre errores en windows config Rutas (composer PATH)
-- Abrir el menú Inicio y busca "Variables de entorno" o "Edit the system environment variables" (Editar las variables de entorno del sistema) y selecciona la opción que aparezca en los resultados de búsqueda.
-- En la ventana de Propiedades del sistema, haz clic en el botón "Variables de entorno".
-- En la sección "Variables de sistema", busca la variable llamada "Path" (PATH).
-- Haz doble clic en la variable "Path" para editarla.
-- En la ventana "Editar variable de sistema", haz clic en "Nuevo".
-- Agrega la ubicación de la instalación de Composer. Por ejemplo, si instalaste Composer en         C:\ProgramData\ComposerSetup\bin, agrega esta ruta.
-- Haz clic en "Aceptar" para guardar los cambios.
+    - Abrir el menú Inicio y busca "Variables de entorno" o "Edit the system environment variables" (Editar las variables de entorno del sistema) y selecciona la opción que aparezca en los resultados de búsqueda.
+    - En la ventana de Propiedades del sistema, haz clic en el botón "Variables de entorno".
+    - En la sección "Variables de sistema", busca la variable llamada "Path" (PATH).
+    - Haz doble clic en la variable "Path" para editarla.
+    - En la ventana "Editar variable de sistema", haz clic en "Nuevo".
+    - Agrega la ubicación de la instalación de Composer. Por ejemplo, si instalaste Composer en         C:\ProgramData\ComposerSetup\bin, agrega esta ruta.
+    - Haz clic en "Aceptar" para guardar los cambios.
 
 
 ## Rutas api
+http://localhost:8080/public/api/movies
 http://localhost:8080/api.php?action=getMovies
 http://localhost:8080/api.php?action=filterByTitle&query=the&mode=startswith
 http://localhost:8080/api.php?action=filterByTitle&query=matrix&mode=contains
