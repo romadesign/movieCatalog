@@ -2,6 +2,11 @@
 - Tener instalado php8 
 - Tener instalado composer
 - Tener instalado xampp se clonara el repositorio y se llevara a la carpeta http
+
+* Instalar:
+```
+    composer install || composer update
+```
 - Tener PHPUnit instalado en el proyecto: 
     Verifica que tienes PHPUnit instalado en tu proyecto. Puedes instalar PHPUnit utilizando Composer si aún no lo has hecho. Abre una terminal en la raíz de tu proyecto y ejecuta el siguiente comando:
 
@@ -103,14 +108,14 @@ Para  iniciar scripts
 
 
 ## Rutas api
-http://localhost:8080/public/api/movies
-http://localhost:8080/api.php?action=getMovies
-http://localhost:8080/api.php?action=filterByTitle&query=the&mode=startswith
-http://localhost:8080/api.php?action=filterByTitle&query=matrix&mode=contains
-http://localhost:8080/api.php?action=filterByTitle&query=on&mode=endswith
-http://localhost:8080/api.php?action=filterByYear&year=1999
-http://localhost:8080/api.php?action=filterByRating&rating=8.0
-http://localhost:8080/api.php?action=filterByRating&minRating=7.0&maxRating=9.0
+- http://localhost:8080/public/api/movies
+- http://localhost:8080/api.php?action=getMovies
+- http://localhost:8080/api.php?action=filterByTitle&query=the&mode=startswith
+- http://localhost:8080/api.php?action=filterByTitle&query=matrix&mode=contains
+- http://localhost:8080/api.php?action=filterByTitle&query=on&mode=endswith
+- http://localhost:8080/api.php?action=filterByYear&year=1999
+- http://localhost:8080/api.php?action=filterByRating&rating=8.0
+- http://localhost:8080/api.php?action=filterByRating&minRating=7.0&maxRating=9.0
 
 Puede tambien iniciar servidor para que las rutas de la api funcionen opcional: 
 ```

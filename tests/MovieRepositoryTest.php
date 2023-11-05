@@ -7,6 +7,7 @@ require 'src/Model/Movie.php';
 
 class MovieRepositoryTest extends TestCase
 {
+
     public function testGetAllMovies()
     {
         @session_start();
@@ -24,6 +25,8 @@ class MovieRepositoryTest extends TestCase
         $this->assertNotEmpty($allMovies);
     }
 
+
+    //Test add movie
     public function testAddMovie()
     {
         // Configura el repositorio en memoria

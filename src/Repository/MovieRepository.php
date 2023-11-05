@@ -10,17 +10,20 @@ class MovieRepository
         return $_SESSION['movies'] ?? $this->movies;
     }
 
+    //add new movie
     public function addMovie(Movie $movie): void
     {
         $this->movies[] = $movie;
     }
 
+    //get all movies
     public function getAllMovies(): array
     {
         $movies = $this->getMoviesFromSession();
         return $movies;
     }
 
+    // Filter by title
     public function filterByTitle(string $query, string $mode = 'contains'): array
     {
         $movies = $this->getMoviesFromSession();
@@ -47,7 +50,7 @@ class MovieRepository
         return $filteredMovies;
     }
 
-
+    //filter by year
     public function filterByYear(int $year)
     {
         $movies = $this->getMoviesFromSession();
@@ -63,6 +66,7 @@ class MovieRepository
         return $filteredMovies;
     }
 
+    //Filter by rating
     public function filterByRating(?float $rating, float $minRating, float $maxRating)
     {
         $movies = $this->getMoviesFromSession();
