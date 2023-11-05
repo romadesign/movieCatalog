@@ -94,6 +94,14 @@ Para  iniciar scripts
     - Haz clic en "Aceptar" para guardar los cambios.
 
 
+## Swagger documentar, y utilizar servicios web RESTful. 
+    - Ingresar a "http://localhost/moviecatalog/src/documentation"
+    - search o explore "http://localhost/moviecatalog/src/documentation/api.php"
+
+
+
+
+
 ## Rutas api
 http://localhost:8080/public/api/movies
 http://localhost:8080/api.php?action=getMovies
@@ -104,7 +112,8 @@ http://localhost:8080/api.php?action=filterByYear&year=1999
 http://localhost:8080/api.php?action=filterByRating&rating=8.0
 http://localhost:8080/api.php?action=filterByRating&minRating=7.0&maxRating=9.0
 
-Para iniciar servidor para que las rutas de la api funcionen: 
+Puede tambien iniciar servidor para que las rutas de la api funcionen opcional: 
 ```
     php -S 0.0.0.0:8080
 ```
+

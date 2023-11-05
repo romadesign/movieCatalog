@@ -1,5 +1,6 @@
 <?php
 
+
 class Movie implements JsonSerializable
 {
     private string $title;
