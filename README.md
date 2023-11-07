@@ -41,14 +41,18 @@ docker-compose up -d || docker-compose up -d
 
 ```
     // Como nos encontramos en la ruta app/myapp
-    test : ./vendor/bin/phpunit .\tests\MovieRepositoryTest.php
+    test : vendor/bin/phpunit tests/MovieRepositoryTest.php
     script : php scripts/movies.php
 
 ```
 
 **Ingresar a testear la api con swagger vamos a navegador y colocamos la url**
 
-```
+``` 
+    // EN el directorio myapp hay una carpeta llamada swagger ui tenemos que eliminar la carpeta ya que esta vacía y clona el repositorio nuevo
+    git clone https://github.com/swagger-api/swagger-ui.git
+
+    // Ahora vamos a la ruta
     url : http://localhost:4500/myapp/src/documentation
 
     // Ya dentro en donde dice "explore" colocamos esta url
