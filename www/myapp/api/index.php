@@ -21,7 +21,7 @@ header('Content-Type: application/json'); // Configura la respuesta como JSON
 
  /**
  * @OA\Get(
- *     path="/moviecatalog/api?action=getMovies",
+ *     path="/myapp/api?action=getMovies",
  *     summary="Obtener películas",
  *     description="Obtiene todas las películas",
  *     @OA\Response(
@@ -42,7 +42,7 @@ if ($_GET['action'] === 'getMovies') {
 
 /**
  * @OA\Get(
- *     path="/moviecatalog/api?action=?&query=?&&mode=?",
+ *     path="/myapp/api?action=?&query=?&&mode=?",
  *     summary="Filtrar películas por título",
  *     @OA\Parameter(
  *         name="action",
@@ -91,7 +91,7 @@ if ($_GET['action'] === 'filterByTitle') {
 
 /**
  * @OA\Get(
- *     path="/moviecatalog/api?action=?&year=?",
+ *     path="/myapp/api?action=?&year=?",
  *     summary="Filtrar películas por año",
  *     @OA\Parameter(
  *         name="action",
@@ -130,7 +130,7 @@ if ($_GET['action'] === 'filterByYear') {
 
 /**
  * @OA\Get(
- *     path="/moviecatalog/api?action=?&rating=?&minRating=?&maxRating=?",
+ *     path="/myapp/api?action=?&rating=?&minRating=?&maxRating=?",
  *     summary="Filtrar películas por año",
  *     @OA\Parameter(
  *         name="action",

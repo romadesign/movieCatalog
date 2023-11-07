@@ -2,7 +2,9 @@ version: "3"
 
 services:
   web:
-    image: webdevops/php-apache:8.0-alpine
+    image: webdevops/php-apache:8.1-alpine
+    environment:
+      - DOCKER_ENV=true
     ports:
       - "4500:80"
     volumes:
